@@ -13,12 +13,8 @@ class Model {
         $this->db->createTable($this->table_name);
     }
     
-    public function insert(Drink $drink){
-        if (isset($drink)){
-            return true;
-        } else{
-            return false;
-        }
+    public function insert(Drink $drink, $db){
+        $this->db->insertRow($db, $drink);
     }
 
 }
