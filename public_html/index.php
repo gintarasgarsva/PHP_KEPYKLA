@@ -8,7 +8,7 @@ $nav = [
     ]
 ];
 
-$db = new FileDB(DB_FILE);
+$db = new Core\FileDB(DB_FILE);
 $db->createTable('test_table');
 $db->insertRow('test_table', ['name' => 'Zebenkstis', 'balls' => true]);
 $db->insertRow('test_table', ['name' => 'Cytis Ritinas', 'balls' => false]);
@@ -21,7 +21,7 @@ var_dump('All database data:', $db->getData());
 $rows_with_balls = $db->getRowsWhere('test_table', ['balls' => true]);
 var_dump('Rows with balls:', $rows_with_balls);
 
-$drink = new Drink;
+$drink = new App\Drinks\Drink();
 $drink->setName('mano neimas');
 $drink->setAmount(2);
 $drink->setAbarot(39.5);

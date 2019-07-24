@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Drinks;
+
 class Drink {
 
     private $data = [];
@@ -24,12 +26,12 @@ class Drink {
      */
     public function setData($array) {
         if (isset($array['id'])) {
-            $this->setId($array['id']) ?? null;
+            $this->setId($array['id']);
         }
-        $this->setName($array['name']) ?? null;
-        $this->setAmount($array['amount_ml']) ?? null;
-        $this->setAbarot($array['abarot']) ?? null;
-        $this->setImage($array['image']) ?? null;
+        $this->setName($array['name'] ?? null);
+        $this->setAmount($array['amount_ml'] ?? null);
+        $this->setAbarot($array['abarot'] ?? null);
+        $this->setImage($array['image'] ?? null);
     }
 
     /**
