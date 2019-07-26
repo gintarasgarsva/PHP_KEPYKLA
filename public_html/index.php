@@ -1,5 +1,4 @@
 <?php
-
 require '../bootloader.php';
 
 $nav = [
@@ -8,33 +7,102 @@ $nav = [
     ]
 ];
 
-$db = new Core\FileDB(DB_FILE);
-$db->createTable('test_table');
-$db->insertRow('test_table', ['name' => 'Zebenkstis', 'balls' => true]);
-$db->insertRow('test_table', ['name' => 'Cytis Ritinas', 'balls' => false]);
-$db->updateRow('test_table', 1, ['name' => 'Rytis Citins', 'balls' => false]);
+$form = [
+    'attr' => [
+        //'action' => '', Neb8tina, jeigu action yra ''
+        'method' => 'POST',
+    ],
+    'fields' => [
+        'test_select' => [
+            'type' => 'select',
+            'label' => 'It`s Time To Choose',
+            'value' => 1, // Koreliuoja su options pasirinkimo indeksu
+            'options' => [
+                'alus',
+                'vodke',
+                'antifryzas',
+                'piens'
+            ],
+            'extra' => [
+                'attr' => [
+                    'class' => 'my-select-field',
+                ],
+                'validators' => [
+                    'validate_not_empty'
+                ]
+            ]
+        ]
+    ],
+    'buttons' => [
+        'Pasirinkti' => [
+            'title' => 'OK',
+            'extra' => [
+                'attr' => [
+                    'class' => 'blue-btn'
+                ]
+            ]
+        ],
+        'Isgerti' => [
+            'title' => 'NO',
+            'extra' => [
+                'attr' => [
+                    'class' => 'red-btn'
+                ]
+            ]
+        ]
+    ],
+    'callbacks' => [
+        'success' => 'form_success',
+        'fail' => 'form_fail'
+    ]
+];
 
-$db->rowInsertIfNotExists('test_table', 4, ['name' => 'Bubilius Kybys', 'balls' => true]);
 
-var_dump('All database data:', $db->getData());
 
-$rows_with_balls = $db->getRowsWhere('test_table', ['balls' => true]);
-var_dump('Rows with balls:', $rows_with_balls);
+$modelDrinks = new App\Drinks\Model();
 
-$drink = new App\Drinks\Drink();
-$drink->setName('mano neimas');
-$drink->setAmount(2);
-$drink->setAbarot(39.5);
-$drink->setImage('/img');
-$drink->setData([
-    'name' => 'Moscovskaja',
-    'amount_ml' => 3,
+//var_dump($modelDrinks->get());
+//$drinks = $modelDrinks->get(['abarot' => 45]);
+
+
+$drink_absentas = new App\Drinks\Drink(
+        [
+    'name' => 'Absentas',
+    'amount_ml' => 100,
+    'abarot' => 70,
+    'image' => '.jpg'
+        ]
+);
+$drink_zaibo = new App\Drinks\Drink(
+        [
+    'name' => 'zaibo alus',
+    'amount_ml' => 500,
+    'abarot' => 10,
+    'image' => '.jpg'
+        ]
+);
+$drink_brendis = new App\Drinks\Drink(
+        [
+    'name' => 'Brendis',
+    'amount_ml' => 700,
     'abarot' => 40,
-    'askdf' => 'sdf',
-    'image' => 'IMGLINK'
-]);
+    'image' => '.jpg'
+        ]
+);
+$drink_gira = new App\Drinks\Drink(
+        [
+    'name' => 'Gira',
+    'amount_ml' => 1000,
+    'abarot' => 4,
+    'image' => '.jpg'
+        ]
+);
 
-var_dump('Drink:', $drink);
+//$modelDrinks->insert($drink_absentas);
+//$modelDrinks->insert($drink_zaibo);
+//$modelDrinks->insert($drink_brendis);
+//$modelDrinks->insert($drink_gira);
+//var_dump($modelDrinks->get());
 
 ?>
 <html>
@@ -50,9 +118,22 @@ var_dump('Drink:', $drink);
     </head>
     <body>
         <?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
-        
+
         <div class="content">
             <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
         </div>
+
+        <form>
+            <select>
+
+                <?php foreach ($modelDrinks->get() as $drink_id => $drink): ?>     
+                <option name="<?php print $drink_id; ?>">
+                   
+                </option>
+
+                
+                <?php endforeach; ?>
+            </select>
+        </form>
     </body>
 </html>

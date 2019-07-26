@@ -27,6 +27,8 @@ class Drink {
     public function setData($array) {
         if (isset($array['id'])) {
             $this->setId($array['id']);
+        }else{
+            $this->data['id'] = null;
         }
         $this->setName($array['name'] ?? null);
         $this->setAmount($array['amount_ml'] ?? null);
@@ -87,7 +89,7 @@ class Drink {
         if ($abarot >= 0 && $abarot < 100) {
             $this->data['abarot'] = $abarot;
         } else {
-            throw new Exception('Abarot invalid');
+            throw new \Exception('Abarot invalid');
         }
     }
 
@@ -115,11 +117,19 @@ class Drink {
         return $this->data['image'];
     }
 
-    public function setId() {
+    /**
+     * Sets Id
+     * @param string 
+     */
+    public function setId(int $id) {
         $this->data['id'] = $id;
     }
 
-    public function getId(int $id) {
+    /**
+     * Returns Id
+     * @return int
+     */
+    public function getId() {
         return $this->data['id'];
     }
 
