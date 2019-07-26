@@ -8,6 +8,10 @@ require 'config.php';
 
 require ROOT . '/vendor/autoload.php';
 
+// Load App file
+
+require ROOT . '/app/classes/App/app.php';
+
 // Load Core Classes
 //require ROOT . '/core/classes/FileDB.php';
 
