@@ -10,7 +10,7 @@ require ROOT . '/vendor/autoload.php';
 
 // Load App file
 
-require ROOT . '/app/classes/App/app.php';
+$app = new App\App();
 
 // Load Core Classes
 //require ROOT . '/core/classes/FileDB.php';

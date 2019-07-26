@@ -106,6 +106,8 @@ $drink_gira = new App\Drinks\Drink(
 //$modelDrinks->insert($drink_gira);
 //var_dump($modelDrinks->get());
 
+
+
 ?>
 <html>
     <head>
