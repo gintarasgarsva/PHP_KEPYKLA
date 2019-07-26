@@ -8,10 +8,6 @@ require 'config.php';
 
 require ROOT . '/vendor/autoload.php';
 
-// Load App file
-
-$app = new App\App();
-
 // Load Core Classes
 //require ROOT . '/core/classes/FileDB.php';
 
@@ -24,3 +20,7 @@ require ROOT . '/core/functions/html/builder.php';
 
 // Load App Functions
 //...
+
+// Load App Functions
+
+$app = new App\App();
