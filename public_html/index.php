@@ -1,6 +1,8 @@
 <?php
 require '../bootloader.php';
 
+$dataBase = new \Core\FileDB(DB_FILE);
+
 $nav = [
     'left' => [
         ['url' => '/', 'title' => 'Home']
@@ -59,7 +61,7 @@ $form = [
 
 
 
-$modelDrinks = new App\Drinks\Model();
+$modelDrinks = new App\Drinks\Model($dataBase);
 
 //var_dump($modelDrinks->get());
 //$drinks = $modelDrinks->get(['abarot' => 45]);
