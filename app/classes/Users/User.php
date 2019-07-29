@@ -11,10 +11,10 @@ class User {
             $this->setData($data);
         } else {
             $this->data = [
-                'name' => $_POST['name'],
-                'surname' => $_POST['surname'],
-                'email' => $_POST['email'],
-                'password' => $_POST['password']
+                'name' => null,
+                'surname' => null,
+                'email' => null,
+                'password' => null
             ];
         }
     }

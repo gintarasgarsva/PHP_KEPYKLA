@@ -22,7 +22,7 @@ class Model {
         $rows = App::$db->getRowsWhere($this->table_name, $conditions);
         foreach ($rows as $row_id => $row_data) {
             $row_data['id'] = $row_id;
-            $users[] = new Drink($row_data);
+            $users[] = new User($row_data);
         }
         return $users;
     }

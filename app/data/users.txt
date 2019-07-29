@@ -1,1 +1,1 @@
-{"user":[{"name":"Gintaras","surname":"Gar\u0161va","email":"gintaras.garsva@gmail.com","password":"asd"},{"name":"asd","surname":"asd","email":"fsfs@bbd.nx","password":"ff"}]}
+{"user":[{"name":"Gintaras","surname":"Gar\u0161va","email":"1@gmail.com","password":"asd"}]}

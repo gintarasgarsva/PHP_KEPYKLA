@@ -18,9 +18,6 @@ $form = [
             'type' => 'text',
             'label' => 'Vardas',
             'placeholder' => 'Vardas',
-            'validators' => [
-                'validate_not_empty',
-            ],
             'extra' => [
                 'attr' => [
                     'class' => 'name',
@@ -34,10 +31,6 @@ $form = [
         'surname' => [
             'type' => 'text',
             'label' => 'Pavarde',
-            'placeholder' => 'Pavarde',
-            'validators' => [
-                'validate_not_empty',
-            ],
             'extra' => [
                 'attr' => [
                     'class' => 'surname',
@@ -51,10 +44,6 @@ $form = [
         'email' => [
             'type' => 'email',
             'label' => 'Email',
-            'placeholder' => 'Email',
-            'validators' => [
-                'validate_not_empty',
-            ],
             'filter' => FILTER_SANITIZE_EMAIL,
             'extra' => [
                 'attr' => [
@@ -77,6 +66,7 @@ $form = [
                 ],
                 'validators' => [
                     'validate_not_empty',
+                    'validate_password'
                 ]
             ],
         ],
@@ -90,6 +80,7 @@ $form = [
                 ],
                 'validators' => [
                     'validate_not_empty',
+                    'validate_password'
                 ]
             ],
         ],
@@ -114,17 +105,18 @@ $form = [
 //    $naudotojas = new App\Users\User();
 //}
 
-function validate_not_exists($filtered_input, &$field) {
-    $data = file_to_array(STORAGE_FILE);
-    foreach ($data as $user_id => $user) {
-        if ($filtered_input === $user['email']) {
-            return false;
-        }
+function validate_email($filtered_input, &$field) {
+    $modelUsers = new App\Users\Model();
+    $users = $modelUsers->get(['email' => $filtered_input]);
+
+    if ($users) {
+        $field['error'] = 'Toks email jau yra';
+        return false;
     }
     return true;
 }
 
-function validate_email() {
+function validate_password() {
     if ($_POST['password'] === $_POST['password_repeat']) {
         return true;
     }
@@ -150,6 +142,8 @@ if (!empty($input)) {
     $success = validate_form($input, $form);
     $message = $success ? 'Cool!' : 'Ooops! Kazkas netaip.';
 }
+
+
 ?>
 <html>
     <head>
@@ -166,7 +160,7 @@ if (!empty($input)) {
 <?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
 
         <div class="content">
-        <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
+<?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
         </div>
 
     </body>
