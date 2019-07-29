@@ -27,7 +27,7 @@ class Drink {
     public function setData($array) {
         if (isset($array['id'])) {
             $this->setId($array['id']);
-        }else{
+        } else {
             $this->data['id'] = null;
         }
         $this->setName($array['name'] ?? null);

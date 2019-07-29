@@ -5,8 +5,8 @@ namespace Core;
 class FileDB {
 
     private $file_name;
-    
-    /** @var array $data */ 
+
+    /** @var array $data */
     private $data;
 
     public function __construct($file_name) {

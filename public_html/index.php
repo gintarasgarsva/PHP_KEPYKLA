@@ -5,7 +5,8 @@ require '../bootloader.php';
 
 $nav = [
     'left' => [
-        ['url' => '/', 'title' => 'Home']
+        ['url' => '/', 'title' => 'Home'],
+        ['url' => 'register.php', 'title' => 'Register']
     ]
 ];
 
@@ -105,9 +106,6 @@ $drink_gira = new App\Drinks\Drink(
 //$modelDrinks->insert($drink_brendis);
 //$modelDrinks->insert($drink_gira);
 //var_dump($modelDrinks->get());
-
-var_dump($app);
-
 ?>
 <html>
     <head>
@@ -121,22 +119,22 @@ var_dump($app);
         <script defer src="media/js/app.js"></script>
     </head>
     <body>
-        <?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
+<?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
 
         <div class="content">
-            <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
+        <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
         </div>
 
         <form>
             <select>
 
-                <?php foreach ($modelDrinks->get() as $drink_id => $drink): ?>     
-                <option name="<?php print $drink_id; ?>">
-                   
-                </option>
+<?php foreach ($modelDrinks->get() as $drink_id => $drink): ?>     
+                    <option name="<?php print $drink_id; ?>">
 
-                
-                <?php endforeach; ?>
+                    </option>
+
+
+<?php endforeach; ?>
             </select>
         </form>
     </body>
