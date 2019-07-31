@@ -1,1 +1,0 @@
-{"user":[{"name":"Gintaras","surname":"Gar\u0161va","email":"1@gmail.com","password":"asd"}]}

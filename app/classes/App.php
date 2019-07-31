@@ -4,6 +4,7 @@ namespace App;
 
 class App {
 
+    /** @var \Core\FileDB * */
     public static $db;
 
     public function __construct() {
@@ -16,3 +17,5 @@ class App {
     }
 
 }
+
+?>

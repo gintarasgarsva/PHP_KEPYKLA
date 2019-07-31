@@ -17,22 +17,12 @@ $form = [
         'method' => 'POST',
     ],
     'fields' => [
-        'name' => [
-            'label' => 'Name',
-            'type' => 'text',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty',
-                ]
-            ],
-        ],
         'email' => [
             'label' => 'Email',
             'type' => 'text',
             'extra' => [
                 'validators' => [
                     'validate_not_empty',
-                    'validate_email'
                 //validate float
                 ]
             ],
@@ -42,23 +32,15 @@ $form = [
             'type' => 'text',
             'extra' => [
                 'validators' => [
-                    'validate_not_empty'
-                ]
-            ],
-        ],
-        'password_second' => [
-            'label' => 'Confirm password',
-            'type' => 'text',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty'
+                    'validate_not_empty',
+//                    'validate_login'
                 ]
             ],
         ],
     ],
     'buttons' => [
         'submit' => [
-            'title' => 'Register',
+            'title' => 'Login',
             'extra' => [
                 'attr' => [
                     'class' => 'red-btn'
@@ -66,7 +48,7 @@ $form = [
             ]
         ],
         'delete' => [
-            'title' => 'Unregister',
+            'title' => 'Log out',
             'extra' => [
                 'attr' => [
                     'class' => 'blue-btn'
@@ -79,10 +61,7 @@ $form = [
         'fail' => 'form_fail'
     ],
     'validators' => [
-        'validate_match' => [
-            'password',
-            'password_second'
-        ]
+        'validate_login',
     ]
 ];
 
@@ -90,16 +69,18 @@ $form = [
 
 $filtered_input = get_form_input($form);
 
-function form_success($filtered_input, &$form) {
-    $newUser = new App\Users\User($filtered_input);
-    $modelUsers = new App\Users\Model();
-    $modelUsers->insert($newUser);
+//if(validate_form($filtered_input, &$form)){
+//    validate_login($filtered_input, $form);
+//}
 
-    $form['fields']['password_second']['error'] = 'Registration successfull!';
+function form_success($filtered_input, &$form) {
+    $_SESSION = $filtered_input;
+    $form['fields']['password']['error'] = 'Login successfull!';
+//    var_dump($_SESSION);
 }
 
 function form_fail() {
-    print 'fail';
+    print 'Login failed...';
 }
 
 $modelUsers = new App\Users\Model();
@@ -113,16 +94,6 @@ switch (get_form_action()) {
         foreach ($modelUsers->get() as $user) {
             $modelUsers->deleteAll();
         }
-}
-
-function validate_email($field_input, &$field) {
-    $modelUser = new App\Users\Model();
-    $users = $modelUser->get(['email' => $field_input]);
-    if ($users) {
-        $field['error'] = 'This email already exists';
-        return false;
-    }
-    return true;
 }
 
 ?>

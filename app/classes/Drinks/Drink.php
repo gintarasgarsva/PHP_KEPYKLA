@@ -25,7 +25,7 @@ class Drink {
      * @param array $array
      */
     public function setData($array) {
-        if (isset($array['id'])) {
+        if(isset($array['id'])){
             $this->setId($array['id']);
         } else {
             $this->data['id'] = null;
@@ -42,6 +42,7 @@ class Drink {
      */
     public function getData() {
         return [
+            'id' => $this->getId(),
             'name' => $this->getName(),
             'amount_ml' => $this->getAmount(),
             'abarot' => $this->getAbarot(),
@@ -89,7 +90,7 @@ class Drink {
         if ($abarot >= 0 && $abarot < 100) {
             $this->data['abarot'] = $abarot;
         } else {
-            throw new \Exception('Abarot invalid');
+            throw new Exception('Abarot invalid');
         }
     }
 
@@ -116,20 +117,20 @@ class Drink {
     public function getImage() {
         return $this->data['image'];
     }
-
+    
     /**
-     * Sets Id
-     * @param string 
+     * 
+     * @param int $id
      */
-    public function setId(int $id) {
+    public function setId(int $id){
         $this->data['id'] = $id;
     }
-
+    
     /**
-     * Returns Id
-     * @return int
+     * 
+     * @return mi
      */
-    public function getId() {
+    public function getId(){
         return $this->data['id'];
     }
 
