@@ -15,6 +15,7 @@ require ROOT . '/core/functions/html/builder.php';
 // Load App Classes
 //require ROOT . '/app/classes/Drink.php';
 
+$app = new App\App();
+
 // Load App Functions
-require ROOT . '/app/functions/validators.php';
-$app = new \App\App();
+//...

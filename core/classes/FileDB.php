@@ -213,7 +213,12 @@ class FileDB {
         foreach ($this->data[$table] as $row_id => $row) {
             $condition_met = true;
             foreach ($conditions as $condition_id => $condition) {
-                if ($row[$condition_id] !== $condition) {
+                if ($condition_id === 'row_id') {
+                    if ($row_id != $condition) {
+                        $condition_met = false;
+                        break;
+                    }
+                } else if ($row[$condition_id] !== $condition) {
                     $condition_met = false;
                     break;
                 }
@@ -223,7 +228,6 @@ class FileDB {
                 $rows[$row_id] = $row;
             }
         }
-
         return $rows;
     }
 
