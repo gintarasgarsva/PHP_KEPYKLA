@@ -65,18 +65,11 @@ $form = [
     ]
 ];
 
-//var_dump(\App\App::$db->getData());
-
 $filtered_input = get_form_input($form);
-
-//if(validate_form($filtered_input, &$form)){
-//    validate_login($filtered_input, $form);
-//}
 
 function form_success($filtered_input, &$form) {
     $_SESSION = $filtered_input;
     $form['fields']['password']['error'] = 'Login successfull!';
-//    var_dump($_SESSION);
 }
 
 function form_fail() {
@@ -84,7 +77,6 @@ function form_fail() {
 }
 
 $modelUsers = new App\Users\Model();
-
 
 switch (get_form_action()) {
     case 'submit':

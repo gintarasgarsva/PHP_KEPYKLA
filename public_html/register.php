@@ -33,7 +33,6 @@ $form = [
                 'validators' => [
                     'validate_not_empty',
                     'validate_email'
-                //validate float
                 ]
             ],
         ],
@@ -65,14 +64,6 @@ $form = [
                 ]
             ]
         ],
-        'delete' => [
-            'title' => 'Unregister',
-            'extra' => [
-                'attr' => [
-                    'class' => 'blue-btn'
-                ]
-            ]
-        ],
     ],
     'callbacks' => [
         'success' => 'form_success',
@@ -86,10 +77,6 @@ $form = [
     ]
 ];
 
-//var_dump(\App\App::$db->getData());
-
-$filtered_input = get_form_input($form);
-
 function form_success($filtered_input, &$form) {
     $newUser = new App\Users\User($filtered_input);
     $modelUsers = new App\Users\Model();
@@ -102,27 +89,12 @@ function form_fail() {
     print 'fail';
 }
 
-$modelUsers = new App\Users\Model();
-
+$filtered_input = get_form_input($form);
 
 switch (get_form_action()) {
     case 'submit':
         validate_form($filtered_input, $form);
         break;
-    case 'delete':
-        foreach ($modelUsers->get() as $user) {
-            $modelUsers->deleteAll();
-        }
-}
-
-function validate_email($field_input, &$field) {
-    $modelUser = new App\Users\Model();
-    $users = $modelUser->get(['email' => $field_input]);
-    if ($users) {
-        $field['error'] = 'This email already exists';
-        return false;
-    }
-    return true;
 }
 
 ?>
@@ -143,6 +115,5 @@ function validate_email($field_input, &$field) {
         <div class="content">
             <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
         </div>
-
     </body>
 </html>
