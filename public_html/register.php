@@ -2,15 +2,6 @@
 
 require '../bootloader.php';
 
-$nav = [
-    'left' => [
-        ['url' => '/index.php', 'title' => 'Home'],
-        ['url' => '/register.php', 'title' => 'Register'],
-        ['url' => '/login.php', 'title' => 'Login'],
-        ['url' => '/logout.php', 'title' => 'Logout'],
-    ]
-];
-
 $form = [
     'attr' => [
         //'action' => '', Nebūtina, jeigu action yra ''
