@@ -9,7 +9,8 @@ class Cookie extends Abstracts\Cookie {
     }
 
     public function delete(): void {
-        $_COOKIE = [];
+        setcookie($_COOKIE[$this->name], null, -1, "/");
+        unset($_COOKIE[$this->name]);
     }
 
     public function exists(): bool {
@@ -21,22 +22,22 @@ class Cookie extends Abstracts\Cookie {
     }
 
     public function read($encoded_array): array {
-        $decoded_array = json_decode($encoded_array, true);
-        if ($decoded_array) {
-            return true;
-        } else {
-            error_reporting(E_WARNING);
-            $decoded_array = [];
+        if ($this->exists()) {
+            $decoded_array = json_decode($encoded_array, true);
+            if ($decoded_array) {
+
+                return $decoded_array;
+            }
+
+            trigger_error("Cannot divide by zero", E_USER_WARNING);
         }
 
-        if (exists() == false) {
-            return $_POST[$this->name] = [];
-        }
+        return [];
     }
 
     public function save($data, $expires_in = 3600): void {
         $encoded_array = json_encode($data);
-        return setcookie($this->name, $encoded_array,time() + $expires_in, "/");
+        setcookie($_COOKIE[$this->name], $encoded_array, time() + $expires_in, "/");
     }
 
 }
