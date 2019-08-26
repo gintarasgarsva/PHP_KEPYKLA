@@ -1,5 +1,5 @@
 {
-    "name": "VytenioProject",
+    "name": "KD3",
     "autoload": {
         "psr-4": {
             "App\\": "app/classes",

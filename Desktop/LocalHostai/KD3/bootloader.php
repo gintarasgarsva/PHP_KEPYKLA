@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
+session_start();
+
 require 'config.php';
 
 // Load All Classes
@@ -26,3 +28,10 @@ $nav = [
         ['url' => '/logout.php', 'title' => 'Logout'],
     ]
 ];
+
+if (isset($_SESSION['email'])){
+    unset($nav['left'][2]);
+    unset($nav['left'][3]);
+}else{
+    unset($nav['left'][4]);
+}

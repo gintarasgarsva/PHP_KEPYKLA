@@ -90,7 +90,7 @@ class Drink {
         if ($abarot >= 0 && $abarot < 100) {
             $this->data['abarot'] = $abarot;
         } else {
-            throw new Exception('Abarot invalid');
+            throw new \Exception('Abarot invalid');
         }
     }
 

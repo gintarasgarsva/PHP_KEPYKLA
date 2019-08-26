@@ -2,6 +2,8 @@
 
 require '../bootloader.php';
 
+
+
 $form = [
     'attr' => [
         //'action' => '', Nebūtina, jeigu action yra ''
@@ -59,8 +61,10 @@ $form = [
 $filtered_input = get_form_input($form);
 
 function form_success($filtered_input, &$form) {
-    $_SESSION = $filtered_input;
     $form['fields']['password']['error'] = 'Login successfull!';
+    $_SESSION['email'] = $filtered_input['email'];
+    $_SESSION['password'] = $filtered_input['password'];
+    header("Location: drinks.php");
 }
 
 function form_fail() {
